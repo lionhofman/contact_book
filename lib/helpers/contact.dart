@@ -1,5 +1,5 @@
 // Tabela com id, name, email,                phone,    img
-//            5454 Lion lionhofman@gmail.com  333333    /images/
+//            5454 NameOfUser user@user.com  333333    /images/
 import 'package:contact_book/helpers/contact_helper.dart';
 
 class Contact {
@@ -16,7 +16,7 @@ class Contact {
     phone = map[phoneColumn];
     img = map[imgColumn];
   }
-  Map toMap() {
+  Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
       nameColumn: name,
       emailColumn: email,
