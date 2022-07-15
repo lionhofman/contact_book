@@ -28,7 +28,7 @@ class ContactHelper {
 
   Future<Database> initDb() async {
     final databasePath = await getDatabasesPath();
-    final path = join(databasePath, "contacts.db");
+    final path = join(databasePath, "contactsnew.db");
     return await openDatabase(path, version: 1,
         onCreate: (Database db, int newerVersion) async {
       await db.execute(
@@ -76,7 +76,7 @@ class ContactHelper {
     return listContact;
   }
 
-  Future<int> getNumber() async {
+  Future<int?> getNumber() async {
     Database dbContact = await db;
     return Sqflite.firstIntValue(
         await dbContact.rawQuery("SELECT COUNT(*) FROM $contactTable"));
