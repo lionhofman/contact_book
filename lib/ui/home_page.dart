@@ -4,6 +4,8 @@ import 'package:contact_book/helpers/contact.dart';
 import 'package:contact_book/helpers/contact_helper.dart';
 import 'package:contact_book/ui/contact_page.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -122,7 +124,10 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              launchUrlString("tel:${contacts[index].phone}");
+                              Navigator.pop(context);
+                            },
                             child: Text(
                               "Ligar",
                               style: TextStyle(color: Colors.red, fontSize: 20),
