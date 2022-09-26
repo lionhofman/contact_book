@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+enum OrderOptions { orderAz, orderZa }
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -37,6 +39,21 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Contatos'),
         backgroundColor: Colors.red,
         centerTitle: true,
+        actions: [
+          PopupMenuButton<OrderOptions>(
+            onSelected: _orderList,
+            itemBuilder: ((context) => <PopupMenuEntry<OrderOptions>>[
+                  const PopupMenuItem(
+                    child: Text("Ordenar de A-Z"),
+                    value: OrderOptions.orderAz,
+                  ),
+                  const PopupMenuItem(
+                    child: Text("Ordenar de Z-A"),
+                    value: OrderOptions.orderZa,
+                  ),
+                ]),
+          ),
+        ],
       ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
@@ -66,12 +83,15 @@ class _HomePageState extends State<HomePage> {
                   width: 80.0,
                   height: 80.0,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: contacts[index].img != null
-                          ? DecorationImage(
-                              image: FileImage(File(contacts[index].img!)))
-                          : DecorationImage(
-                              image: AssetImage("images/person.png")))),
+                    shape: BoxShape.circle,
+                    image: contacts[index].img != null
+                        ? DecorationImage(
+                            image: FileImage(File(contacts[index].img!)),
+                            fit: BoxFit.cover)
+                        : DecorationImage(
+                            image: AssetImage("images/person.png"),
+                            fit: BoxFit.cover),
+                  )),
               Padding(
                 padding: EdgeInsets.only(left: 10.0),
                 child: Column(
@@ -195,5 +215,22 @@ class _HomePageState extends State<HomePage> {
         contacts = list;
       });
     });
+  }
+
+  void _orderList(OrderOptions result) {
+    switch (result) {
+      case OrderOptions.orderAz:
+        contacts.sort((a, b) {
+          return a.name!.toLowerCase().compareTo(b.name!.toLowerCase());
+        });
+        break;
+      case OrderOptions.orderZa:
+        contacts.sort((a, b) {
+          return b.name!.toLowerCase().compareTo(a.name!.toLowerCase());
+        });
+        break;
+    }
+
+    setState(() {});
   }
 }

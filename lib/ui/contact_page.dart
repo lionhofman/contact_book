@@ -65,12 +65,15 @@ class _ContactPageState extends State<ContactPage> {
                     width: 140.0,
                     height: 140.0,
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: _editedContact!.img != null
-                            ? DecorationImage(
-                                image: FileImage(File(_editedContact!.img!)))
-                            : DecorationImage(
-                                image: AssetImage("images/person.png")))),
+                      shape: BoxShape.circle,
+                      image: _editedContact!.img != null
+                          ? DecorationImage(
+                              image: FileImage(File(_editedContact!.img!)),
+                              fit: BoxFit.cover)
+                          : DecorationImage(
+                              image: AssetImage("images/person.png"),
+                              fit: BoxFit.cover),
+                    )),
                 onTap: () {
                   ImagePicker.platform
                       .pickImage(source: ImageSource.camera)
