@@ -31,10 +31,10 @@ class Contact {
 
   Contact({
     this.id,
-    required this.name,
-    required this.email,
-    required this.phone,
-    required this.img,
+    this.name,
+    this.email,
+    this.phone,
+    this.img,
   });
 
   @override

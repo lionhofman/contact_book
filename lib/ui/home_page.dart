@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:contact_book/helpers/contact.dart';
 import 'package:contact_book/helpers/contact_helper.dart';
+import 'package:contact_book/ui/contact_page.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 enum OrderOptions { orderAz, orderZa }
 
@@ -26,12 +29,7 @@ class _HomePageState extends State<HomePage> {
     //       img: "imgtest");
 
     //   helper.saveContact(c);
-
-    helper.getAllContacts().then((list) {
-      setState(() {
-        contacts = list;
-      });
-    });
+    _getAllContacts();
   }
 
   @override
@@ -59,7 +57,9 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          _showContactPage();
+        },
         child: Icon(Icons.add),
         backgroundColor: Colors.red,
       ),
@@ -123,10 +123,11 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      onTap: () {
+        _showOptions(context, index);
+      },
     );
   }
-<<<<<<< Updated upstream
-=======
 
   void _showOptions(BuildContext context, int index) {
     showModalBottomSheet(
@@ -232,5 +233,4 @@ class _HomePageState extends State<HomePage> {
 
     setState(() {});
   }
->>>>>>> Stashed changes
 }
